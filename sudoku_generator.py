@@ -23,8 +23,8 @@ class SudokuGenerator:
 	None
     '''
     def __init__(self, row_length, removed_cells):
-        pass
-
+        self.row_length = row_length
+        self.removed_cells = int(removed_cells)
     '''
 	Returns a 2D python list of numbers which represents the board
 
@@ -32,7 +32,7 @@ class SudokuGenerator:
 	Return: list[list]
     '''
     def get_board(self):
-        pass
+        return list(self.board)
 
     '''
 	Displays the board to the console
@@ -42,7 +42,8 @@ class SudokuGenerator:
 	Return: None
     '''
     def print_board(self):
-        pass
+        for item in self.board:
+            print(item, sep = '\n')
 
     '''
 	Determines if num is contained in the specified row (horizontal) of the board
