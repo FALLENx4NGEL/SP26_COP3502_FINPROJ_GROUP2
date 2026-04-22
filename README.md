@@ -6,7 +6,7 @@ YOUTUBE LINK FOR DEMO: {The fitnessgramTM pacer test}
 Role: Board Generation / Difficulty / Logic
 
 ### RB Notes:
-Role: FILL THIS ON YOUR OWN TIME
+Role: Main class / UI for start screen & end screen
 
 ### TS Notes:
 Role: FILL THIS ON YOUR OWN TIME
