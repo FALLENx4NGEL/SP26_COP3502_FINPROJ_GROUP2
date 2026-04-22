@@ -12,7 +12,7 @@ Role: FILL THIS ON YOUR OWN TIME
 Role: FILL THIS ON YOUR OWN TIME
 
 ### JMC Notes:
-Role: FILL THIS ON YOUR OWN TIME
+Role: Rules and validation logic
 
     def __init__(self, row_length, removed_cells):
         self.row_length = row_length
