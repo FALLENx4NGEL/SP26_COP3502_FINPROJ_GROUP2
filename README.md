@@ -9,7 +9,7 @@ Role: Board Generation / Difficulty / Logic
 Role: Main class / UI for start screen & end screen
 
 ### TS Notes:
-Role: FILL THIS ON YOUR OWN TIME
+Role: Visuals
 
 ### JMC Notes:
 Role: Rules and validation logic
