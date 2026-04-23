@@ -1,8 +1,6 @@
 from sudoku_generator import *
 import pygame as pg
 
-
-
 def tilegen(difficult):
     generate_sudoku(81, difficult)
 
@@ -14,7 +12,11 @@ def difficultyselect(difficulty):                                               
     elif difficulty == 2:
         return 50
 
+def windowgen():
+    ...
+
 def main():
+
     difficult = difficultyselect(0)                                                                                      # JK - Need someone to do stuff with PyGame for this, click EZ = 0, MED = 1, HRD = 2
     tilegen(difficult)
 
