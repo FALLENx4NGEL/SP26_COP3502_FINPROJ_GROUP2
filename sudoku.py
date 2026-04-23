@@ -120,7 +120,31 @@ def draw_game_screen(board, selected, original_board):
 
     pg.display.update()
     return reset_button, restart_button, exit_button
+    
+def check_board(board):
+    for row in board:
+        if sorted(row) != [1,2,3,4,5,6,7,8,9]:
+            return False
+def is_full(board):
+    for row in board:
+        if 0 in row:
+            return False
+    return True
+    for col in range(9):
+        vals = [board[row][col] for row in range(9)]
+        if sorted(vals) != [1,2,3,4,5,6,7,8,9]:
+            return False
 
+    for box_row in range(0, 9, 3):
+        for box_col in range(0, 9, 3):
+            vals = []
+            for r in range(box_row, box_row + 3):
+                for c in range(box_col, box_col + 3):
+                    vals.append(board[r][c])
+            if sorted(vals) != [1,2,3,4,5,6,7,8,9]:
+                return False
+
+    return True
 
 def click_to_cell(x, y):
     if BOARD_X <= x <= BOARD_X + BOARD_SIZE and BOARD_Y <= y <= BOARD_Y + BOARD_SIZE:
