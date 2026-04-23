@@ -9,7 +9,7 @@ Role: Board Generation / Difficulty / Logic
 Role: Main class / UI for start screen & end screen
 
 ### TS Notes:
-Role: Visuals
+Role: Sudoku UI and controls
 
 ### JMC Notes:
 Role: Rules and validation logic
