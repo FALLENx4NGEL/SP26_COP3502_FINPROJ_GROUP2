@@ -1,6 +1,8 @@
 from sudoku_generator import *
 import pygame as pg
 
+
+
 def tilegen(difficulty):
     return generate_sudoku(9, difficulty)
 

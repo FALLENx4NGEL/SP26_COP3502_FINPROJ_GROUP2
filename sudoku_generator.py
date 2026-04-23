@@ -214,6 +214,63 @@ class SudokuGenerator:
                 self.board[row][col] = 0
                 removed += 1
 
+
+class Cell:
+    def __init__(self, value, row, col, screen):
+        self.value = value
+        self.row = row
+        self.col = col
+        self.screen = screen
+
+    def set_cell_value(self, new_value):
+        self.value = new_value
+
+    def set_sketched_value(self, new_value):
+        self.value = new_value
+
+    '''Draws this cell, along with the value inside it.
+	If this cell has a nonzero value, that value is displayed.
+	Otherwise, no value is displayed in the cell.
+	The cell is outlined red if it is currently selected.'''
+
+    def draw(self):                                                                                                     #JK: Tym I'm leaving this to you since this is related to your work, leaving instructions for this section above the line
+        ...
+
+class Board:
+    def __init__(self, width, height, screen, difficulty):
+        self.width = width
+        self.height = height
+        self.screen = screen                                                                                            # Window coming from PyGame
+        self.difficulty = difficulty
+
+    '''Draws an outline of the Sudoku grid, with bold lines to delineate the 3x3 boxes.
+	Draws every cell on this board.'''
+
+    def draw(self):
+        ...
+
+    def select(self, row, col):
+        ...
+
+    def click(self, x, y):
+        ...
+
+    def clear(self):
+        ...
+
+    def sketch(self, value):
+        ...
+
+    def place_number(self, value):
+        ...
+
+    def reset_to_original(self):
+        ...
+
+    def is_full(self): #Returns Boolean if board is full or not
+        ...
+
+
 '''
 DO NOT CHANGE
 Provided for students
