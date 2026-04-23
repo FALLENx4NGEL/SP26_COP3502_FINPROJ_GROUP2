@@ -3,7 +3,7 @@
 YOUTUBE LINK FOR DEMO: {The fitnessgramTM pacer test}
 
 ### JK Notes: 
-Role: Board Generation / Difficulty / Logic
+Role: Board Generation / Difficulty / QA
 
 ### RB Notes:
 Role: Main class / UI for start screen & end screen

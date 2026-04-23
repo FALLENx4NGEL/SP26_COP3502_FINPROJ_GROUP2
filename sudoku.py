@@ -2,44 +2,6 @@ from sudoku_generator import *
 import pygame as pg
 import sys
 
-WIDTH = 630
-HEIGHT = 750
-BOARD_SIZE = 540
-BOARD_X = 45
-BOARD_Y = 100
-CELL_SIZE = BOARD_SIZE // 9
-
-BG_COLOR = (245, 247, 250)
-LINE_COLOR = (0, 0, 0)
-SELECT_COLOR = (220, 50, 50)
-BUTTON_COLOR = (230, 140, 60)
-BUTTON_TEXT_COLOR = (255, 255, 255)
-FIXED_NUM_COLOR = (20, 20, 20)
-USER_NUM_COLOR = (40, 90, 180)
-TITLE_COLOR = (20, 20, 20)
-
-pg.init()
-screen = pg.display.set_mode((WIDTH, HEIGHT))
-pg.display.set_caption("Sudoku")
-
-TITLE_FONT = pg.font.SysFont("arial", 40)
-TEXT_FONT = pg.font.SysFont("arial", 26)
-NUMBER_FONT = pg.font.SysFont("arial", 28)
-
-
-def tilegen(difficult):
-    return generate_sudoku(9, difficult)
-
-
-def difficultyselect(difficulty):  # 0 = Easy, 1 = Medium, 2 = Hard
-    if difficulty == 0:
-        return 30
-    elif difficulty == 1:
-        return 40
-    elif difficulty == 2:
-        return 50
-
-
 class Button:
     def __init__(self, x, y, w, h, text):
         self.rect = pg.Rect(x, y, w, h)
@@ -55,6 +17,32 @@ class Button:
     def clicked(self, pos):
         return self.rect.collidepoint(pos)
 
+#HELPER FUNCTIONS
+def is_solved(board):
+    for row in board:
+        if 0 in row or len(set(row)) != 9:
+            return False
+    for col in range(9):
+        if len(set(board[row][col] for row in range(9))) != 9:
+            return False
+    for box_row in range(0, 9, 3):
+        for box_col in range(0, 9, 3):
+            box = [board[box_row + i][box_col + j] for i in range(3) for j in range(3)]
+            if len(set(box)) != 9:
+                return False
+    return True
+
+def tilegen(difficult):
+    return generate_sudoku(9, difficult)
+
+
+def difficultyselect(difficulty):  # 0 = Easy, 1 = Medium, 2 = Hard
+    if difficulty == 0:
+        return 30
+    elif difficulty == 1:
+        return 40
+    elif difficulty == 2:
+        return 50
 
 def draw_start_screen():
     screen.fill(BG_COLOR)
@@ -141,6 +129,13 @@ def click_to_cell(x, y):
         return row, col
     return None
 
+def draw_win_screen():
+    screen.fill(BG_COLOR)
+    msg = TITLE_FONT.render("You Win!", True, TITLE_COLOR)
+    sub = TEXT_FONT.render("Press R to restart or Q to quit", True, TITLE_COLOR)
+    screen.blit(msg, msg.get_rect(center=(WIDTH // 2, 300)))
+    screen.blit(sub, sub.get_rect(center=(WIDTH // 2, 380)))
+    pg.display.update()
 
 def windowgen():
     clock = pg.time.Clock()
@@ -227,18 +222,52 @@ def windowgen():
                     elif original_board[row][col] == 0:
                         if event.unicode in "123456789":
                             board[row][col] = int(event.unicode)
+                            if is_solved(board):  # add these two lines
+                                state = "win"
+                                draw_win_screen()
                         elif event.key == pg.K_BACKSPACE or event.key == pg.K_DELETE:
                             board[row][col] = 0
+            elif state == "win":
+                draw_win_screen()
+                if event.type == pg.KEYDOWN:
+                    if event.key == pg.K_r:
+                        state = "start"
+                    elif event.key == pg.K_q:
+                        pg.quit()
+                        sys.exit()
 
         if state == "start":
             easy_button, medium_button, hard_button = draw_start_screen()
         elif state == "game":
             reset_button, restart_button, exit_button = draw_game_screen(board, selected, original_board)
 
-
 def main():
-    windowgen()
+    global screen, TITLE_FONT, TEXT_FONT, WIDTH, HEIGHT, BOARD_SIZE, LINE_COLOR, SELECT_COLOR, BOARD_X, BOARD_Y, CELL_SIZE
+    global BG_COLOR, BUTTON_COLOR, BUTTON_TEXT_COLOR, FIXED_NUM_COLOR, USER_NUM_COLOR, TITLE_COLOR, NUMBER_FONT
+    WIDTH = 630
+    HEIGHT = 750
+    BOARD_SIZE = 540
+    BOARD_X = 45
+    BOARD_Y = 100
+    CELL_SIZE = BOARD_SIZE // 9
 
+    BG_COLOR = (245, 247, 250)
+    LINE_COLOR = (0, 0, 0)
+    SELECT_COLOR = (220, 50, 50)
+    BUTTON_COLOR = (230, 140, 60)
+    BUTTON_TEXT_COLOR = (255, 255, 255)
+    FIXED_NUM_COLOR = (20, 20, 20)
+    USER_NUM_COLOR = (40, 90, 180)
+    TITLE_COLOR = (20, 20, 20)
+
+    pg.init()
+    screen = pg.display.set_mode((WIDTH, HEIGHT))
+    pg.display.set_caption("Sudoku")
+
+    TITLE_FONT = pg.font.SysFont("arial", 40)
+    TEXT_FONT = pg.font.SysFont("arial", 26)
+    NUMBER_FONT = pg.font.SysFont("arial", 28)
+    windowgen()
 
 if __name__ == '__main__':
     main()

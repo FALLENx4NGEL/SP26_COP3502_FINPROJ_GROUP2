@@ -130,6 +130,7 @@ class SudokuGenerator:
         for i in range (self.box_length):
             for j in range (self.box_length):
                 self.board[row_start + i][col_start + j] = nums[idx]
+                idx += 1
     
     '''
     Fills the three boxes along the main diagonal of the board
@@ -209,11 +210,10 @@ class SudokuGenerator:
         removed = 0
         while removed < self.removed_cells:
             row = random.randint(0, self.row_length - 1)
-            col = random.randint(0, self.box_length - 1)
+            col = random.randint(0, self.row_length - 1)
             if self.board[row][col] != 0:
                 self.board[row][col] = 0
                 removed += 1
-
 
 class Cell:
     def __init__(self, value, row, col, screen):
